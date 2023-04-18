@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class BaseApplication extends Application {
@@ -18,7 +17,6 @@ public class BaseApplication extends Application {
     private Activity mTopActivity;
     private int mActivityCount = 0;
     private static Handler mainHandler;//全局的主线程的handler
-
 
 
     @Override
@@ -94,27 +92,23 @@ public class BaseApplication extends Application {
 
     /**
      * 获取当前进程名字
+     * 默认是包名
+     * 开了子进程的就是包名:processname
      *
-     * @return
+     * @return 进程名字
      */
     public String getProcesssName() {
         int pid = android.os.Process.myPid();
         String processName = "";
         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        List lst = am.getRunningAppProcesses();
-        if (lst == null) {
+        List<ActivityManager.RunningAppProcessInfo> processInfoList = am.getRunningAppProcesses();
+        if (processInfoList == null) {
             return getPackageName();
         }
-        Iterator i = lst.iterator();
-        while (i.hasNext()) {
-            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
-            try {
-                if (info.pid == pid) {
-                    processName = info.processName;
-                    break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        for (ActivityManager.RunningAppProcessInfo info : processInfoList) {
+            if (info.pid == pid) {
+                processName = info.processName;
+                break;
             }
         }
         return processName;
@@ -144,7 +138,6 @@ public class BaseApplication extends Application {
         super.onTerminate();
         unregisterActivityLifecycleCallbacks(callbacks);
     }
-
 
 
 }
