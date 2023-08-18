@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    protected boolean isResume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +41,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initEvent() {
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isResume = true;
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isResume = false;
+    }
+
+    protected boolean isResume(){
+        return isResume;
+    }
 }
