@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.bt_start:
 
+                //跳转第二个activity
                 startActivity(new Intent(this,SecondActivity.class));
 
                 break;
