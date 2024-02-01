@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.bt_test_64:
 
+                //冲突测试
                 startActivity(new Intent(this,SecondActivity.class));
 
                 break;
