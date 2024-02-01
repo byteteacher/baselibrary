@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 break;
             case R.id.bt_test_64:
-                //主分支测试
+                //主分支测试，再次提交
                 startActivity(new Intent(this,SecondActivity.class));
 
                 break;
